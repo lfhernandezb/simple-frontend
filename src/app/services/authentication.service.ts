@@ -12,6 +12,7 @@ import { User } from '../../interfaces/user';
 export class AuthenticationService {
 
   httpOptions: any;
+  private authenticated: boolean = false;
   //private userSubject: BehaviorSubject<User>;
   //public user: Observable<User | null>;
   // store the URL so we can redirect after logging in
@@ -33,25 +34,7 @@ export class AuthenticationService {
   }
   */
   public isAuthenticated() {
-    /*
-      const user = this.userValue;
-      //// console.log("isAuthenticated user: " + user);
-      //// console.log("isAuthenticated user && user.authdata: " + user && user.authdata);
-      //return user && user.authdata;
-      return user != null;
-      //return false;
-    */
-    /*
-    let ls = sessionStorage.getItem('user');
-    if (ls) {
-      if (JSON.parse(ls)) {
-        // console.log('AuthenticationService::isAuthenticated returning true');
-        return true;
-      }
-    }
-    */
-    // console.log('AuthenticationService::isAuthenticated returning false');
-    return false;
+    return this.authenticated;
   }
 
   login(username: string, password: string) {
@@ -71,6 +54,7 @@ export class AuthenticationService {
       .pipe(map(
         (user: any) => {
               console.log("login data: " + user);
+              this.authenticated = true;
               //if (user.name) {
                 //let user: User = {} as User;
                 // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
@@ -92,6 +76,7 @@ export class AuthenticationService {
       // sessionStorage.removeItem('session');
       //  publishes null to all subscribers
       // this.userSubject.next({} as any);
-      this.router.navigate(['/login']);
+      this.authenticated = false;
+      //this.router.navigate(['/login']);
   }
 }

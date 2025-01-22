@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { pipe } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { NgIf } from '@angular/common';
+//import { init as initApm } from '@elastic/apm-rum';
 
 @Component({
   selector: 'app-login',
@@ -84,7 +85,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     // console.log("isAuthenticated: " + this.authenticationService.isAuthenticated());
-
     if (this.authenticationService.isAuthenticated()) {
       this.router.navigate(['/home']);
     }
